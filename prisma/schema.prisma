@@ -194,6 +194,7 @@ model Service {
   category       String   @default("Engineering") // Engineering, Cloud, AI, Strategy, Design
   icon           String   @default("Code") // Lucide icon name
   featuredImage  String?
+  videoUrl       String? // Product video: uploaded file URL or YouTube embed link
   featuresJson   String   // JSON string array of features
   techStackJson  String   // JSON string array of technologies
   processJson    String   // JSON string array of workflow steps

@@ -14,18 +14,8 @@ import {
   TableRow,
   TableCell,
 } from '@/components/admin/ui/DataTable';
-import {
-  Code2,
-  Plus,
-  Edit2,
-  Trash2,
-  ExternalLink,
-  Layers,
-  CheckCircle2,
-  AlertCircle,
-  X,
-  RefreshCw,
-} from 'lucide-react';
+import { Code2, Plus, Edit2, Trash2, ExternalLink, Layers, CheckCircle2, AlertCircle, X, RefreshCw } from 'lucide-react';
+import { MediaUploader } from '@/components/admin/ui/MediaUploader';
 
 export default function AdminServicesPage() {
   const [services, setServices] = useState<any[]>([]);
@@ -44,6 +34,8 @@ export default function AdminServicesPage() {
     fullDesc: '',
     features: 'Multi-Region Kubernetes, Zero-Downtime Migration, 99.99% SLA Guarantee',
     techStack: 'Kubernetes, Terraform, AWS, Docker',
+    featuredImage: '',
+    videoUrl: '',
     status: 'PUBLISHED',
   });
   const [saving, setSaving] = useState(false);
@@ -77,6 +69,8 @@ export default function AdminServicesPage() {
       fullDesc: '',
       features: 'Multi-Region Kubernetes, Zero-Downtime Migration, 99.99% SLA Guarantee',
       techStack: 'Kubernetes, Terraform, AWS, Docker',
+      featuredImage: '',
+      videoUrl: '',
       status: 'PUBLISHED',
     });
     setError('');
@@ -108,6 +102,8 @@ export default function AdminServicesPage() {
       fullDesc: svc.fullDesc,
       features: feats,
       techStack: techs,
+      featuredImage: svc.featuredImage || '',
+      videoUrl: svc.videoUrl || '',
       status: svc.status,
     });
     setError('');
@@ -128,6 +124,8 @@ export default function AdminServicesPage() {
       category: formData.category,
       shortDesc: formData.shortDesc,
       fullDesc: formData.fullDesc,
+      featuredImage: formData.featuredImage,
+      videoUrl: formData.videoUrl,
       featuresJson: JSON.stringify(featsArr),
       techStackJson: JSON.stringify(techsArr),
       processJson: JSON.stringify(['Discovery', 'Architecture', 'Execution', 'Release']),
@@ -459,6 +457,23 @@ export default function AdminServicesPage() {
                   onChange={(e) => setFormData({ ...formData, fullDesc: e.target.value })}
                   placeholder="Comprehensive technical scope, architecture standards, and delivery models..."
                   className="w-full bg-white border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <MediaUploader
+                  kind="image"
+                  label="Product Photo"
+                  value={formData.featuredImage}
+                  onChange={(url) => setFormData({ ...formData, featuredImage: url })}
+                  hint="Shown on the product card and detail page."
+                />
+                <MediaUploader
+                  kind="video"
+                  label="Product Video"
+                  value={formData.videoUrl}
+                  onChange={(url) => setFormData({ ...formData, videoUrl: url })}
+                  hint="Shown on the product detail page."
                 />
               </div>
 

@@ -39,6 +39,8 @@ export const serviceSchema = z.object({
   fullDesc: z.string().min(10, 'Full description is required'),
   category: z.string().default('Engineering'),
   icon: z.string().default('Code'),
+  featuredImage: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  videoUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   featuresJson: z.string().or(z.array(z.string())).optional(),
   techStackJson: z.string().or(z.array(z.string())).optional(),
   processJson: z.string().or(z.array(z.string())).optional(),

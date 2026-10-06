@@ -20,6 +20,26 @@ interface Props {
   params: { slug: string };
 }
 
+/** Convert a YouTube watch/shorts URL to an embed URL; returns null for direct file URLs. */
+function youtubeEmbedUrl(url: string): string | null {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, '');
+    if (host === 'youtube.com' || host === 'youtu.be' || host === 'm.youtube.com') {
+      let id = '';
+      if (host === 'youtu.be') id = u.pathname.slice(1);
+      else if (u.pathname.startsWith('/shorts/')) id = u.pathname.split('/')[2];
+      else if (u.pathname === '/embed/') id = u.pathname.split('/')[2];
+      else id = u.searchParams.get('v') || '';
+      id = id.split('?')[0].split('&')[0];
+      if (id) return `https://www.youtube.com/embed/${id}`;
+    }
+  } catch {
+    /* not a URL — treat as direct file */
+  }
+  return null;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = await prisma.service.findUnique({
     where: { slug: params.slug },
@@ -116,6 +136,40 @@ export default async function ServiceDetailPage({ params }: Props) {
           </Button>
         </div>
       </div>
+
+      {/* Product Media — photo & video (shown when the admin adds them) */}
+      {(service.featuredImage || service.videoUrl) && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {service.featuredImage && (
+            <div className="rounded-3xl overflow-hidden border border-slate-200 bg-slate-50">
+              <img
+                src={service.featuredImage}
+                alt={service.title}
+                className="w-full h-72 object-cover"
+              />
+            </div>
+          )}
+          {service.videoUrl &&
+            (() => {
+              const embed = youtubeEmbedUrl(service.videoUrl as string);
+              return (
+                <div className="rounded-3xl overflow-hidden border border-slate-200 bg-black aspect-video">
+                  {embed ? (
+                    <iframe
+                      src={embed}
+                      title={`${service.title} video`}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video src={service.videoUrl as string} controls className="w-full h-full" />
+                  )}
+                </div>
+              );
+            })()}
+        </div>
+      )}
 
       {/* Full Description & Highlights */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">

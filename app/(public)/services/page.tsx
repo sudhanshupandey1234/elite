@@ -57,6 +57,16 @@ export default async function ServicesCatalogPage() {
               className="p-8 rounded-3xl bg-white border border-slate-200/90 shadow-soft-sm hover:shadow-soft-lg hover:border-blue-300 hover:-translate-y-1 transition-all flex flex-col justify-between group"
             >
               <div className="space-y-4">
+                {svc.featuredImage && (
+                  <div className="rounded-2xl overflow-hidden border border-slate-100 -mx-1">
+                    <img
+                      src={svc.featuredImage}
+                      alt={svc.title}
+                      className="w-full h-40 object-cover group-hover:scale-[1.02] transition-transform"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
                   <div className="p-3 rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
                     <Code2 className="w-6 h-6" />
