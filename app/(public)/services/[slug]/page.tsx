@@ -5,6 +5,7 @@ import Link from 'next/link';
 import prisma from '@/lib/prisma';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { JsonLd } from '@/components/seo/JsonLd';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -47,9 +48,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!service) return { title: 'Service Not Found' };
 
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const title = service.seoTitle || `${service.title} | Elite Globex`;
+  const description = service.seoDesc || service.shortDesc;
+
   return {
-    title: service.seoTitle || `${service.title} | EliteGlobex`,
-    description: service.seoDesc || service.shortDesc,
+    title,
+    description,
+    alternates: { canonical: `${siteUrl}/services/${service.slug}` },
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url: `/services/${service.slug}`,
+      ...(service.featuredImage ? { images: [{ url: service.featuredImage }] } : {}),
+    },
   };
 }
 
@@ -87,6 +100,28 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: service.title,
+          description: service.shortDesc,
+          provider: {
+            '@type': 'LocalBusiness',
+            name: 'Elite Globex',
+            telephone: '+91-7355223184',
+            email: 'eliteglobex4794@gmail.com',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Lucknow',
+              addressRegion: 'Uttar Pradesh',
+              addressCountry: 'IN',
+            },
+          },
+          areaServed: 'IN',
+          ...(service.featuredImage ? { image: service.featuredImage } : {}),
+        }}
+      />
       {/* Breadcrumb / Back Link */}
       <div>
         <Link

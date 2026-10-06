@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { getHomepageCMS, getSiteSettings, DEFAULT_HOMEPAGE_CONTENT } from '@/lib/cms';
 
 export const revalidate = 0; // Dynamic rendering for instant CMS updates
@@ -874,6 +875,7 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-24 sm:space-y-32">
+      <OrganizationJsonLd />
       {activeSections.map((section: any) => renderSection(section.sectionKey, section))}
     </div>
   );

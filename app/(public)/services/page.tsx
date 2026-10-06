@@ -8,9 +8,10 @@ import { Button } from '@/components/ui/Button';
 import { ArrowRight, Code2, Layers, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Engineering Services & Technical Capabilities',
+  title: 'IT Products & Equipment — Computers, Printers, Panels, Studio Setups',
   description:
-    'Comprehensive enterprise software engineering, cloud architecture, AI & ML pipelines, mobile apps, and workflow automation services by EliteGlobex.',
+    'Shop IT products from Elite Globex Lucknow: computers, printers & scanners, interactive panels, online class studio setups, servers, toner cartridges, drones, TVs & more — with installation & support.',
+  alternates: { canonical: '/services' },
 };
 
 export const revalidate = 60;

@@ -18,9 +18,10 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
-  title: 'About Us | Global Technology & Enterprise Engineering',
+  title: 'About Us | IT Solutions Company in Lucknow',
   description:
-    'Discover EliteGlobex: Our mission, engineering principles, leadership approach, and global technology capabilities.',
+    'Elite Globex, Lucknow — "Your every problem has one solution." IT products, GeM & tender services, AMC and bulk supply for schools, offices & government bodies across India.',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {

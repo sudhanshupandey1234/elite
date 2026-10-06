@@ -1,33 +1,65 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
   title: {
-    default: 'EliteGlobex | Building Digital Solutions That Move Businesses Forward',
-    template: '%s | EliteGlobex',
+    default: 'Elite Globex — IT Products, Solutions & GeM Services in Lucknow',
+    template: '%s | Elite Globex',
   },
   description:
-    'EliteGlobex is a global technology and digital transformation company delivering enterprise cloud architecture, applied AI solutions, modern web engineering, mobile apps, and workflow automation.',
+    'Elite Globex (Lucknow) — your one-stop IT solutions partner: computers, printers, interactive panels, online class studio setups, servers, toner cartridges, drones & more. GeM portal services, government tenders, AMC & bulk supply across India.',
   keywords: [
-    'Enterprise Software',
-    'Cloud Architecture',
-    'DevOps',
-    'Artificial Intelligence',
-    'Next.js Development',
-    'Digital Transformation',
-    'EliteGlobex',
-    'Software Consulting',
+    'Elite Globex',
+    'IT solutions Lucknow',
+    'computer dealer Lucknow',
+    'interactive panel Lucknow',
+    'online class studio setup',
+    'printer scanner dealer',
+    'GeM portal services',
+    'government tender supplier',
+    'toner cartridge supplier',
+    'server NAS supplier India',
+    'drone camera dealer',
+    'AMC services Lucknow',
+    'bulk IT supply',
+    'office equipment supplier UP',
   ],
-  authors: [{ name: 'EliteGlobex' }],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  authors: [{ name: 'Elite Globex' }],
+  creator: 'Elite Globex',
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_IN',
     url: '/',
-    siteName: 'EliteGlobex',
-    title: 'EliteGlobex | Global Technology & Digital Solutions',
-    description: 'Transforming global organizations with enterprise-grade cloud, AI, and software systems.',
+    siteName: 'Elite Globex',
+    title: 'Elite Globex — IT Products, Solutions & GeM Services in Lucknow',
+    description:
+      'Your every problem has one solution. Computers, printers, interactive panels, studio setups, GeM & tender services — from Lucknow to all of India.',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Elite Globex — IT Products, Solutions & GeM Services in Lucknow',
+    description:
+      'Your every problem has one solution. IT products, GeM portal services, government tenders & AMC — Lucknow, India.',
+  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export default function RootLayout({

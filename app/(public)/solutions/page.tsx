@@ -8,9 +8,10 @@ import { Button } from '@/components/ui/Button';
 import { ArrowRight, Layers, Sparkles, CheckCircle2, Shield, Building2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Enterprise Solutions & Proprietary Platforms',
+  title: 'GeM, Tenders, AMC & Bulk Supply Solutions',
   description:
-    'Discover ready-to-deploy platforms built by EliteGlobex: OmniCloud ERP, CogniFlow AI, and SecureShield IAM.',
+    'Elite Globex solutions: GeM portal registration & bidding, government tenders, institutional orders, rate contracts, installation, AMC & bulk IT supply across India.',
+  alternates: { canonical: '/solutions' },
 };
 
 export const revalidate = 60;
