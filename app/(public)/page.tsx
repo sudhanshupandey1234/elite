@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { Reveal } from '@/components/ui/Reveal';
 import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { getHomepageCMS, getSiteSettings, DEFAULT_HOMEPAGE_CONTENT } from '@/lib/cms';
 
@@ -81,10 +82,10 @@ export default async function HomePage() {
   const sections = cmsData.sections || [];
 
   const capabilities = [
-    { title: 'Web & Software', desc: 'Full-stack enterprise platforms', icon: <Code2 className="w-5 h-5 text-blue-600" /> },
-    { title: 'AI & Automation', desc: 'Applied LLMs & intelligent workflows', icon: <Sparkles className="w-5 h-5 text-indigo-600" /> },
-    { title: 'Cloud Solutions', desc: 'Scalable multi-cloud infrastructure', icon: <Server className="w-5 h-5 text-sky-600" /> },
-    { title: 'Digital Transformation', desc: 'Modernizing legacy architectures', icon: <Compass className="w-5 h-5 text-emerald-600" /> },
+    { title: 'IT Products', desc: 'Computers, panels, printers & more', icon: <Code2 className="w-5 h-5 text-blue-700" /> },
+    { title: 'GeM & Tenders', desc: 'Bidding, registration & rate contracts', icon: <Sparkles className="w-5 h-5 text-blue-700" /> },
+    { title: 'Installation', desc: 'End-to-end setup & configuration', icon: <Server className="w-5 h-5 text-blue-700" /> },
+    { title: 'AMC & Support', desc: 'Maintenance that never sleeps', icon: <Compass className="w-5 h-5 text-blue-700" /> },
   ];
 
   const processSteps = [
@@ -129,25 +130,22 @@ export default async function HomePage() {
       case 'hero':
         if (!hero.heroIsActive) return null;
         return (
-          <section key="hero" className="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden">
-            {/* Subtle Ambient Background Gradients */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-gradient-to-tr from-blue-100/70 via-indigo-50/50 to-sky-100/60 blur-[120px] pointer-events-none rounded-full" />
+          <section key="hero" className="relative pt-10 pb-16 md:pt-20 md:pb-24 overflow-hidden grain">
+            {/* Soft daylight wash — no neon blobs */}
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(37,99,235,0.07),transparent_70%)]" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 {/* Left Content */}
                 <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                   {hero.heroEyebrow && (
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider shadow-soft-sm">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                      <span>{hero.heroEyebrow}</span>
-                    </div>
+                    <span className="kicker justify-center lg:justify-start">{hero.heroEyebrow}</span>
                   )}
 
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.12]">
+                  <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold text-slate-950 leading-[1.08]">
                     {hero.heroTitle}{' '}
                     {hero.heroHighlight && (
-                      <span className="gradient-text-blue">{hero.heroHighlight}</span>
+                      <span className="text-blue-700">{hero.heroHighlight}</span>
                     )}
                   </h1>
 
@@ -187,98 +185,92 @@ export default async function HomePage() {
                     )}
                   </div>
 
-                  {/* Trust Indicators */}
+                  {/* Trust Indicators — real business numbers */}
                   <div className="pt-8 border-t border-slate-200 grid grid-cols-3 gap-6 text-left">
                     <div>
-                      <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Enterprise</div>
-                      <div className="text-xs text-slate-500 font-medium mt-0.5">Cloud Architecture</div>
+                      <div className="font-display text-2xl sm:text-3xl font-bold text-slate-950">10+</div>
+                      <div className="text-xs text-slate-500 font-medium mt-0.5">Product Categories</div>
                     </div>
                     <div>
-                      <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">SOC2 / ISO</div>
-                      <div className="text-xs text-slate-500 font-medium mt-0.5">Security Standards</div>
+                      <div className="font-display text-2xl sm:text-3xl font-bold text-slate-950">GeM</div>
+                      <div className="text-xs text-slate-500 font-medium mt-0.5">Registered & Tender Experts</div>
                     </div>
                     <div>
-                      <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Global</div>
-                      <div className="text-xs text-slate-500 font-medium mt-0.5">Engineering Delivery</div>
+                      <div className="font-display text-2xl sm:text-3xl font-bold text-slate-950">Pan-India</div>
+                      <div className="text-xs text-slate-500 font-medium mt-0.5">Supply & Installation</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Abstract Technology Preview Composition */}
+                {/* Right — Featured product showcase */}
                 <div className="lg:col-span-5">
-                  <div className="relative rounded-3xl bg-gradient-to-br from-slate-50 via-white to-blue-50/40 border border-slate-200/90 p-6 md:p-8 shadow-soft-xl space-y-6">
+                  <div className="relative rounded-3xl bg-white border border-slate-200/90 p-6 md:p-7 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.18)] space-y-5">
                     {/* Visual Header */}
                     <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-xl bg-blue-700 text-white flex items-center justify-center font-display font-bold text-sm">
                           EG
                         </div>
                         <div>
-                          <div className="text-xs font-bold text-slate-900">System Architecture Hub</div>
-                          <div className="text-[10px] text-slate-500">Live Enterprise Deployment</div>
+                          <div className="text-sm font-bold text-slate-900">Featured This Week</div>
+                          <div className="text-[11px] text-slate-500">Handpicked for institutions</div>
                         </div>
                       </div>
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-semibold border border-emerald-200">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        {hero.heroBadgeText || 'Operational'}
-                      </span>
+                      <Link href="/services" className="text-xs font-bold text-blue-700 hover:text-blue-800 flex items-center gap-1">
+                        <span className="u-sweep">View all</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
                     </div>
 
-                    {/* Layered Floating Product Cards */}
-                    <div className="space-y-3.5">
-                      {/* Card 1: Cloud & API */}
-                      <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-soft-sm flex items-center justify-between hover:shadow-soft-md transition-shadow">
+                    {/* Product rows */}
+                    <div className="space-y-3">
+                      <Link href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
                         <div className="flex items-center gap-3">
-                          <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600">
+                          <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-blue-700 shadow-sm">
+                            <Layers className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="text-[13px] font-bold text-slate-900">Interactive Flat Panel</div>
+                            <div className="text-[11px] text-slate-500">65&Prime;&ndash;86&Prime; · schools & boardrooms</div>
+                          </div>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-700 group-hover:translate-x-0.5 transition-all" />
+                      </Link>
+
+                      <Link href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-blue-700 shadow-sm">
+                            <Cpu className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="text-[13px] font-bold text-slate-900">Online Class Studio Setup</div>
+                            <div className="text-[11px] text-slate-500">Camera · audio · lighting · end-to-end</div>
+                          </div>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-700 group-hover:translate-x-0.5 transition-all" />
+                      </Link>
+
+                      <Link href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-blue-700 shadow-sm">
                             <Server className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="text-xs font-bold text-slate-900">Multi-Cloud Infrastructure</div>
-                            <div className="text-[11px] text-slate-500">Kubernetes & Automated Pipelines</div>
+                            <div className="text-[13px] font-bold text-slate-900">Computers & Servers</div>
+                            <div className="text-[11px] text-slate-500">Bulk supply · labs & offices</div>
                           </div>
                         </div>
-                        <span className="text-xs font-bold text-blue-600">99.99% SLA</span>
-                      </div>
-
-                      {/* Card 2: AI & Data */}
-                      <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-soft-sm flex items-center justify-between hover:shadow-soft-md transition-shadow">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600">
-                            <Sparkles className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <div className="text-xs font-bold text-slate-900">Cognitive AI Pipelines</div>
-                            <div className="text-[11px] text-slate-500">Domain-Trained Enterprise RAG</div>
-                          </div>
-                        </div>
-                        <span className="text-xs font-bold text-indigo-600">High Velocity</span>
-                      </div>
-
-                      {/* Card 3: Security & Governance */}
-                      <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-soft-sm flex items-center justify-between hover:shadow-soft-md transition-shadow">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600">
-                            <ShieldCheck className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <div className="text-xs font-bold text-slate-900">Zero-Trust IAM & Security</div>
-                            <div className="text-[11px] text-slate-500">End-to-End Encryption & RBAC</div>
-                          </div>
-                        </div>
-                        <span className="text-xs font-bold text-emerald-600">Compliant</span>
-                      </div>
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-700 group-hover:translate-x-0.5 transition-all" />
+                      </Link>
                     </div>
 
-                    {/* Micro Stats Banner */}
-                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    {/* Micro strip */}
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                       <div className="flex items-center gap-1.5">
-                        <Zap className="w-3.5 h-3.5 text-amber-500" />
-                        <span>Continuous Delivery</span>
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                        <span>Genuine products · GST billing</span>
                       </div>
-                      <Link href="/projects" className="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-1">
-                        <span>View Case Studies</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
+                      <span className="font-semibold text-slate-700">Lucknow → Pan-India</span>
                     </div>
                   </div>
                 </div>
@@ -289,24 +281,24 @@ export default async function HomePage() {
 
       case 'trust_strip':
         return (
-          <section key="trust_strip" className="border-y border-slate-200/80 bg-slate-50/70 py-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-8">
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-500">
-                  {sectionConfig?.title || 'Technology that helps teams build, scale and transform'}
-                </span>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                {capabilities.map((cap) => (
+          <section key="trust_strip" className="border-y border-slate-200/80 bg-slate-50/70 py-8 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+              <span className="kicker justify-center">
+                {sectionConfig?.title || 'One partner for all your IT needs'}
+              </span>
+            </div>
+            <div className="marquee-mask marquee-paused overflow-hidden">
+              <div className="animate-marquee flex w-max gap-5 pr-5">
+                {[...capabilities, ...capabilities].map((cap, idx) => (
                   <div
-                    key={cap.title}
-                    className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-soft-sm hover:shadow-soft-md hover:border-slate-300 transition-all flex flex-col items-start gap-2.5"
+                    key={`${cap.title}-${idx}`}
+                    className="w-64 shrink-0 p-5 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_10px_rgba(15,23,42,0.04)] flex items-center gap-3"
                   >
-                    <div className="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                    <div className="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100/60 shrink-0">
                       {cap.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">{cap.title}</h4>
+                      <h4 className="font-display text-sm font-bold text-slate-900">{cap.title}</h4>
                       <p className="text-xs text-slate-500 mt-0.5">{cap.desc}</p>
                     </div>
                   </div>
@@ -413,55 +405,58 @@ export default async function HomePage() {
       case 'services':
         return (
           <section key="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div className="space-y-3 max-w-2xl">
-                <Badge variant="blue">{sectionConfig?.subtitle || 'Our Engineering Practices'}</Badge>
-                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                  {sectionConfig?.title || 'Solutions Built for Modern Businesses'}
-                </h2>
-                <p className="text-slate-600 text-sm sm:text-base">
-                  Comprehensive technology services designed to solve complex challenges and accelerate digital execution.
-                </p>
+            <Reveal>
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div className="space-y-3 max-w-2xl">
+                  <span className="kicker">{sectionConfig?.subtitle || 'What we supply'}</span>
+                  <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-950">
+                    {sectionConfig?.title || 'Everything your institution needs'}
+                  </h2>
+                  <p className="text-slate-600 text-sm sm:text-base">
+                    Genuine products, transparent pricing and end-to-end installation — from a single classroom to a full campus.
+                  </p>
+                </div>
+                <Button variant="secondary" href="/services" icon={<ArrowRight className="w-4 h-4" />}>
+                  View All Products
+                </Button>
               </div>
-              <Button variant="secondary" href="/services" icon={<ArrowRight className="w-4 h-4" />}>
-                View All Services
-              </Button>
-            </div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((svc) => (
-                <Link
-                  key={svc.id}
-                  href={`/services/${svc.slug}`}
-                  className="p-7 rounded-3xl bg-white border border-slate-200/90 shadow-soft-sm hover:shadow-soft-lg hover:border-blue-300 hover:-translate-y-1 transition-all group flex flex-col justify-between"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        <Layers className="w-5 h-5" />
+              {services.map((svc, idx) => (
+                <Reveal key={svc.id} delay={(idx % 3) * 90}>
+                  <Link
+                    href={`/services/${svc.slug}`}
+                    className="h-full p-7 rounded-3xl bg-white border border-slate-200/90 shadow-[0_2px_12px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_45px_-18px_rgba(15,23,42,0.18)] hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="w-12 h-12 rounded-2xl bg-blue-50/80 border border-blue-100/70 flex items-center justify-center text-blue-700 group-hover:bg-blue-700 group-hover:text-white group-hover:border-blue-700 transition-colors duration-300">
+                          <Layers className="w-5 h-5" />
+                        </div>
+                        {svc.category && (
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                            {svc.category}
+                          </span>
+                        )}
                       </div>
-                      {svc.category && (
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
-                          {svc.category}
-                        </span>
-                      )}
+
+                      <div className="space-y-2">
+                        <h3 className="font-display text-lg font-bold text-slate-950">
+                          <span className="u-sweep">{svc.title}</span>
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                          {svc.shortDesc}
+                        </p>
+                      </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                        {svc.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
-                        {svc.shortDesc}
-                      </p>
+                    <div className="pt-5 mt-5 border-t border-slate-100 flex items-center text-xs font-bold text-blue-700">
+                      <span>Explore Product</span>
+                      <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
-                  </div>
-
-                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center text-xs font-bold text-blue-600 group-hover:text-blue-700">
-                    <span>Explore Service</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
+                  </Link>
+                </Reveal>
               ))}
             </div>
           </section>
@@ -471,15 +466,15 @@ export default async function HomePage() {
         return (
           <section key="solutions" className="bg-slate-50/80 border-y border-slate-200/80 py-16 md:py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-              <div className="text-center max-w-2xl mx-auto space-y-3">
-                <Badge variant="purple">{sectionConfig?.subtitle || 'Proprietary Platforms'}</Badge>
-                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                  {sectionConfig?.title || 'Enterprise Software Suites'}
+              <Reveal className="text-center max-w-2xl mx-auto space-y-3">
+                <span className="kicker justify-center">{sectionConfig?.subtitle || 'How we work'}</span>
+                <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-950">
+                  {sectionConfig?.title || 'Beyond products: complete service'}
                 </h2>
                 <p className="text-slate-600 text-sm sm:text-base">
-                  Turnkey, enterprise-grade software platforms engineered by EliteGlobex to accelerate operational performance.
+                  From GeM bidding to installation and AMC — we handle the paperwork, the setup and the aftercare.
                 </p>
-              </div>
+              </Reveal>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {solutions.map((sol) => {

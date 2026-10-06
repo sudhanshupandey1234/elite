@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const display = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['500', '600', '700'],
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
@@ -68,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${display.variable}`}>
       <body className="min-h-screen bg-white text-slate-900 selection:bg-blue-600 selection:text-white antialiased">
         {children}
       </body>
