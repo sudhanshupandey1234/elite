@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import { upload } from '@vercel/blob/client';
 import { ImagePlus, Video, X, Loader2, Link2 } from 'lucide-react';
 
 interface MediaUploaderProps {
@@ -32,13 +33,16 @@ export function MediaUploader({ kind, label, value, onChange, hint }: MediaUploa
     setUploading(true);
     setError('');
     try {
-      const form = new FormData();
-      form.append('file', file);
-      form.append('kind', kind);
-      const res = await fetch('/api/admin/upload', { method: 'POST', body: form });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Upload failed');
-      onChange(data.url);
+      // Direct browser → Vercel Blob upload (bypasses the 4.5MB serverless body limit,
+      // so product videos upload fine). The token route validates type & size.
+      const ext = file.name.split('.').pop()?.toLowerCase() || (isVideo ? 'mp4' : 'jpg');
+      const key = `products/${kind}s/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      const blob = await upload(key, file, {
+        access: 'public',
+        handleUploadUrl: '/api/admin/upload/token',
+        clientPayload: JSON.stringify({ kind }),
+      });
+      onChange(blob.url);
       setShowUrl(false);
     } catch (err: any) {
       setError(err.message || 'Upload failed');
