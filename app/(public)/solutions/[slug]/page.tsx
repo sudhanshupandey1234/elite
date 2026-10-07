@@ -26,9 +26,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!solution) return { title: 'Solution Not Found' };
 
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const title = solution.seoTitle || `${solution.name} — GeM, Tenders & AMC Services in India | Elite Globex`;
+  const description =
+    solution.seoDesc ||
+    `${solution.shortDesc} Elite Globex Lucknow — end-to-end support, transparent pricing & pan-India service. Call 7355223184.`;
+
   return {
-    title: solution.seoTitle || `${solution.name} | EliteGlobex`,
-    description: solution.seoDesc || solution.shortDesc,
+    title,
+    description,
+    alternates: { canonical: `${siteUrl}/solutions/${solution.slug}` },
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      url: `/solutions/${solution.slug}`,
+    },
   };
 }
 

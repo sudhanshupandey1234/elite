@@ -49,8 +49,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return { title: 'Service Not Found' };
 
   const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-  const title = service.seoTitle || `${service.title} | Elite Globex`;
-  const description = service.seoDesc || service.shortDesc;
+  const title = service.seoTitle || `${service.title} — Price & Dealer in Lucknow, UP | Elite Globex`;
+  const description =
+    service.seoDesc ||
+    `${service.shortDesc} Get best price quotation in Lucknow, Uttar Pradesh. Genuine brands, installation & pan-India support. Call 7355223184.`;
 
   return {
     title,
@@ -122,6 +124,19 @@ export default async function ServiceDetailPage({ params }: Props) {
           ...(service.featuredImage ? { image: service.featuredImage } : {}),
         }}
       />
+      {faqs.length > 0 && (
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqs.slice(0, 8).map((f: { q: string; a: string }) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a },
+            })),
+          }}
+        />
+      )}
       {/* Breadcrumb / Back Link */}
       <div>
         <Link
