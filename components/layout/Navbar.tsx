@@ -238,24 +238,24 @@ export function Navbar({ navItems: propNavItems, services: propServices, solutio
 
                     {/* Services Dropdown */}
                     {servicesDropdown && (
-                      <div className="absolute top-full left-0 w-84 p-2.5 rounded-2xl bg-white border border-slate-200 shadow-soft-xl z-50 animate-fade-in space-y-1">
+                      <div className="absolute top-full left-0 mt-2 w-[21rem] p-2.5 rounded-2xl bg-white border border-slate-200 shadow-[0_24px_60px_-20px_rgba(15,23,42,0.25)] z-50 animate-fade-in space-y-1">
                         <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100 mb-1">
-                          Our Engineering Practices
+                          Our Products
                         </div>
                         {servicesList.map((svc) => (
                           <Link
                             key={svc.title}
                             href={svc.href}
-                            className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+                            className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/60 transition-colors group"
                           >
-                            <div className="p-2 rounded-lg bg-blue-50 border border-blue-100 group-hover:bg-blue-100/60 transition-colors shrink-0">
+                            <div className="p-2 rounded-lg bg-blue-50 border border-blue-100 group-hover:bg-white group-hover:border-blue-200 transition-colors shrink-0">
                               {svc.icon}
                             </div>
-                            <div>
-                              <div className="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                            <div className="min-w-0">
+                              <div className="text-[13px] font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
                                 {svc.title}
                               </div>
-                              <div className="text-[11px] text-slate-500 leading-snug">
+                              <div className="text-[11px] text-slate-500 leading-snug line-clamp-2">
                                 {svc.desc}
                               </div>
                             </div>
@@ -299,24 +299,24 @@ export function Navbar({ navItems: propNavItems, services: propServices, solutio
 
                     {/* Solutions Dropdown */}
                     {solutionsDropdown && (
-                      <div className="absolute top-full left-0 w-80 p-2.5 rounded-2xl bg-white border border-slate-200 shadow-soft-xl z-50 animate-fade-in space-y-1">
+                      <div className="absolute top-full left-0 mt-2 w-[21rem] p-2.5 rounded-2xl bg-white border border-slate-200 shadow-[0_24px_60px_-20px_rgba(15,23,42,0.25)] z-50 animate-fade-in space-y-1">
                         <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100 mb-1">
-                          Proprietary Platforms
+                          Our Solutions
                         </div>
                         {solutionsList.map((sol) => (
                           <Link
                             key={sol.name}
                             href={sol.href}
-                            className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+                            className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/60 transition-colors group"
                           >
-                            <div className="p-2 rounded-lg bg-indigo-50 border border-indigo-100 group-hover:bg-indigo-100/60 transition-colors shrink-0">
+                            <div className="p-2 rounded-lg bg-blue-50 border border-blue-100 group-hover:bg-white group-hover:border-blue-200 transition-colors shrink-0">
                               {sol.icon}
                             </div>
-                            <div>
-                              <div className="text-xs font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                            <div className="min-w-0">
+                              <div className="text-[13px] font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
                                 {sol.name}
                               </div>
-                              <div className="text-[11px] text-slate-500 leading-snug">
+                              <div className="text-[11px] text-slate-500 leading-snug line-clamp-2">
                                 {sol.tagline}
                               </div>
                             </div>
