@@ -23,6 +23,9 @@ import {
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Reveal } from '@/components/ui/Reveal';
+import { HeroAnim } from '@/components/anim/HeroAnim';
+import { CountUp } from '@/components/anim/CountUp';
+import { StaggerIn } from '@/components/anim/StaggerIn';
 import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { getHomepageCMS, getSiteSettings, DEFAULT_HOMEPAGE_CONTENT } from '@/lib/cms';
 
@@ -132,29 +135,30 @@ export default async function HomePage() {
         return (
           <section key="hero" className="relative pt-10 pb-16 md:pt-20 md:pb-24 overflow-hidden grain">
             {/* Soft daylight wash — no neon blobs */}
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(37,99,235,0.07),transparent_70%)]" />
+            <div data-hero="bg" className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(37,99,235,0.07),transparent_70%)]" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <HeroAnim>
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 {/* Left Content */}
                 <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                   {hero.heroEyebrow && (
-                    <span className="kicker justify-center lg:justify-start">{hero.heroEyebrow}</span>
+                    <span data-hero="eyebrow" className="kicker justify-center lg:justify-start">{hero.heroEyebrow}</span>
                   )}
 
-                  <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold text-slate-950 leading-[1.08]">
+                  <h1 data-hero="title" className="font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold text-slate-950 leading-[1.08]">
                     {hero.heroTitle}{' '}
                     {hero.heroHighlight && (
                       <span className="text-blue-700">{hero.heroHighlight}</span>
                     )}
                   </h1>
 
-                  <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                  <p data-hero="desc" className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                     {hero.heroDescription}
                   </p>
 
                   {/* CTAs */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+                  <div data-hero="cta" className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                     {hero.heroPrimaryBtnText && (
                       <Button
                         size="lg"
@@ -186,9 +190,9 @@ export default async function HomePage() {
                   </div>
 
                   {/* Trust Indicators — real business numbers */}
-                  <div className="pt-8 border-t border-slate-200 grid grid-cols-3 gap-6 text-left">
+                  <div data-hero="stats" className="pt-8 border-t border-slate-200 grid grid-cols-3 gap-6 text-left">
                     <div>
-                      <div className="font-display text-2xl sm:text-3xl font-bold text-slate-950">10+</div>
+                      <div className="font-display text-2xl sm:text-3xl font-bold text-slate-950"><CountUp end={10} suffix="+" /></div>
                       <div className="text-xs text-slate-500 font-medium mt-0.5">Product Categories</div>
                     </div>
                     <div>
@@ -204,7 +208,7 @@ export default async function HomePage() {
 
                 {/* Right — Featured product showcase */}
                 <div className="lg:col-span-5">
-                  <div className="relative rounded-3xl bg-white border border-slate-200/90 p-6 md:p-7 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.18)] space-y-5">
+                  <div data-hero="showcase" className="relative rounded-3xl bg-white border border-slate-200/90 p-6 md:p-7 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.18)] space-y-5">
                     {/* Visual Header */}
                     <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                       <div className="flex items-center gap-2.5">
@@ -224,7 +228,7 @@ export default async function HomePage() {
 
                     {/* Product rows */}
                     <div className="space-y-3">
-                      <Link href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
+                      <Link data-hero="showcase-row" href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
                         <div className="flex items-center gap-3">
                           <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-blue-700 shadow-sm">
                             <Layers className="w-4 h-4" />
@@ -237,7 +241,7 @@ export default async function HomePage() {
                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-700 group-hover:translate-x-0.5 transition-all" />
                       </Link>
 
-                      <Link href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
+                      <Link data-hero="showcase-row" href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
                         <div className="flex items-center gap-3">
                           <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-blue-700 shadow-sm">
                             <Cpu className="w-4 h-4" />
@@ -250,7 +254,7 @@ export default async function HomePage() {
                         <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-700 group-hover:translate-x-0.5 transition-all" />
                       </Link>
 
-                      <Link href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
+                      <Link data-hero="showcase-row" href="/services" className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex items-center justify-between hover:bg-blue-50/60 hover:border-blue-200 transition-colors group">
                         <div className="flex items-center gap-3">
                           <div className="p-2.5 rounded-xl bg-white border border-slate-200 text-blue-700 shadow-sm">
                             <Server className="w-4 h-4" />
@@ -275,6 +279,7 @@ export default async function HomePage() {
                   </div>
                 </div>
               </div>
+            </HeroAnim>
             </div>
           </section>
         );
@@ -422,9 +427,9 @@ export default async function HomePage() {
               </div>
             </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((svc, idx) => (
-                <Reveal key={svc.id} delay={(idx % 3) * 90}>
+            <StaggerIn className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {services.map((svc) => (
+                <div key={svc.id} data-stagger-item className="h-full">
                   <Link
                     href={`/services/${svc.slug}`}
                     className="h-full p-7 rounded-3xl bg-white border border-slate-200/90 shadow-[0_2px_12px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_45px_-18px_rgba(15,23,42,0.18)] hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between"
@@ -456,9 +461,9 @@ export default async function HomePage() {
                       <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
-                </Reveal>
+                </div>
               ))}
-            </div>
+            </StaggerIn>
           </section>
         );
 
