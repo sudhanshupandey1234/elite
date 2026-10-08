@@ -481,7 +481,7 @@ export default async function HomePage() {
                 </p>
               </Reveal>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <StaggerIn className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {solutions.map((sol) => {
                   let features: string[] = [];
                   try {
@@ -491,7 +491,8 @@ export default async function HomePage() {
                   return (
                     <div
                       key={sol.id}
-                      className="p-8 rounded-3xl bg-white border border-slate-200/90 shadow-soft-sm hover:shadow-soft-lg hover:border-slate-300 transition-all flex flex-col justify-between"
+                      data-stagger-item
+                      className="p-8 rounded-3xl bg-white border border-slate-200/90 shadow-soft-sm hover:shadow-soft-lg hover:border-slate-300 transition-all flex flex-col justify-between h-full"
                     >
                       <div className="space-y-5">
                         <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center">
@@ -532,7 +533,7 @@ export default async function HomePage() {
                     </div>
                   );
                 })}
-              </div>
+              </StaggerIn>
             </div>
           </section>
         );
@@ -555,10 +556,11 @@ export default async function HomePage() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StaggerIn className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {industries.map((ind) => (
                 <Link
                   key={ind.id}
+                  data-stagger-item
                   href={`/industries/${ind.slug}`}
                   className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-soft-sm hover:shadow-soft-lg hover:border-blue-300 hover:-translate-y-1 transition-all group flex flex-col justify-between"
                 >
@@ -582,7 +584,7 @@ export default async function HomePage() {
                   </div>
                 </Link>
               ))}
-            </div>
+            </StaggerIn>
           </section>
         );
 
@@ -600,10 +602,11 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <StaggerIn className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {whyChooseUs.map((item) => (
                   <div
                     key={item.num}
+                    data-stagger-item
                     className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-soft-sm space-y-3"
                   >
                     <div className="flex items-center justify-between">
@@ -616,7 +619,7 @@ export default async function HomePage() {
                     <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
-              </div>
+              </StaggerIn>
             </div>
           </section>
         );

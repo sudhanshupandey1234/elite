@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -24,6 +24,8 @@ import { Button } from '@/components/ui/Button';
 import { SearchModal } from '@/components/ui/SearchModal';
 import { ProjectModal } from '@/components/ui/ProjectModal';
 import { cn } from '@/lib/utils';
+import { gsap } from '@/components/anim/gsap-setup';
+import { motionPrefs } from '@/components/anim/motion';
 
 interface NavbarProps {
   navItems?: Array<{
@@ -56,6 +58,24 @@ export function Navbar({ navItems: propNavItems, services: propServices, solutio
   const [servicesDropdown, setServicesDropdown] = useState(false);
   const [solutionsDropdown, setSolutionsDropdown] = useState(false);
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Subtle entrance: navbar slides down + fades in on page load
+  useLayoutEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const { reduced, mobile } = motionPrefs();
+    if (reduced) return;
+    const ctx = gsap.context(() => {
+      gsap.from(el, {
+        y: mobile ? -10 : -18,
+        autoAlpha: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+      });
+    }, el);
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -185,6 +205,7 @@ export function Navbar({ navItems: propNavItems, services: propServices, solutio
   return (
     <>
       <header
+        ref={headerRef}
         className={cn(
           'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
           isScrolled

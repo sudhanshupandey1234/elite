@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import { gsap } from './gsap-setup';
+import { motionPrefs, calm } from './motion';
 
 interface StaggerInProps {
   children: ReactNode;
@@ -22,13 +23,14 @@ export function StaggerIn({ children, className = '', y = 30, stagger = 0.09 }: 
   useLayoutEffect(() => {
     const root = ref.current;
     if (!root) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const { reduced, mobile } = motionPrefs();
+    if (reduced) return;
     const items = root.querySelectorAll('[data-stagger-item]');
     if (!items.length) return;
 
     const ctx = gsap.context(() => {
       gsap.from(items, {
-        y,
+        y: calm(y, mobile),
         autoAlpha: 0,
         duration: 0.75,
         ease: 'power3.out',

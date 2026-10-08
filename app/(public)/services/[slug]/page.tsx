@@ -6,6 +6,7 @@ import prisma from '@/lib/prisma';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { ImgReveal } from '@/components/anim/ImgReveal';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -191,13 +192,13 @@ export default async function ServiceDetailPage({ params }: Props) {
       {(service.featuredImage || service.videoUrl) && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {service.featuredImage && (
-            <div className="rounded-3xl overflow-hidden border border-slate-200 bg-slate-50">
+            <ImgReveal className="rounded-3xl overflow-hidden border border-slate-200 bg-slate-50">
               <img
                 src={service.featuredImage}
                 alt={service.title}
                 className="w-full h-72 object-cover"
               />
-            </div>
+            </ImgReveal>
           )}
           {service.videoUrl &&
             (() => {
