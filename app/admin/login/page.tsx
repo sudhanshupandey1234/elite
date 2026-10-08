@@ -7,8 +7,8 @@ import { Globe, Lock, Mail, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('admin@eliteglobex.com');
-  const [password, setPassword] = useState('Admin@123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -36,11 +36,6 @@ export default function AdminLoginPage() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const setCredentials = (e: string, p: string) => {
-    setEmail(e);
-    setPassword(p);
   };
 
   return (
@@ -128,49 +123,6 @@ export default function AdminLoginPage() {
             </div>
           </form>
 
-          {/* Quick One-Click Demo Credentials */}
-          <div className="pt-4 border-t border-slate-100 space-y-2.5">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 text-center">
-              Quick One-Click Demo Roles:
-            </div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <button
-                type="button"
-                onClick={() => setCredentials('admin@eliteglobex.com', 'Admin@123456')}
-                className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left text-slate-700 transition-colors"
-              >
-                <div className="font-bold text-blue-700 text-[11px]">Super Admin</div>
-                <div className="text-[10px] text-slate-500 truncate">admin@eliteglobex.com</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setCredentials('sarah.manager@eliteglobex.com', 'Manager@123456')}
-                className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left text-slate-700 transition-colors"
-              >
-                <div className="font-bold text-indigo-700 text-[11px]">Operations Mgr</div>
-                <div className="text-[10px] text-slate-500 truncate">sarah.manager@...</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setCredentials('hr@eliteglobex.com', 'HRAdmin@123456')}
-                className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left text-slate-700 transition-colors"
-              >
-                <div className="font-bold text-purple-700 text-[11px]">HR Admin</div>
-                <div className="text-[10px] text-slate-500 truncate">hr@eliteglobex.com</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setCredentials('james.eng@eliteglobex.com', 'Staff@123456')}
-                className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left text-slate-700 transition-colors"
-              >
-                <div className="font-bold text-emerald-700 text-[11px]">Staff Engineer</div>
-                <div className="text-[10px] text-slate-500 truncate">james.eng@...</div>
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Back to Public Site */}

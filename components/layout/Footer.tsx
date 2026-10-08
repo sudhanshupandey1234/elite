@@ -216,12 +216,6 @@ export function Footer({ settings = {}, services = [], solutions = [] }: FooterP
                 {legal.name}
               </Link>
             ))}
-            <Link
-              href="/admin/login"
-              className="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-blue-600 transition-colors border border-slate-200 font-mono text-[11px] shadow-soft-sm"
-            >
-              Admin & ERP Portal →
-            </Link>
           </div>
         </div>
       </div>
