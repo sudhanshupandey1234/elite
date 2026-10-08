@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import {
@@ -19,9 +20,9 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const industry = await prisma.industry.findUnique({
+  const industry = await safeQuery(() => prisma.industry.findUnique({
     where: { slug: params.slug },
-  });
+  }), null);
 
   if (!industry) return { title: 'Industry Not Found' };
 
@@ -34,9 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 60;
 
 export default async function IndustryDetailPage({ params }: Props) {
-  const industry = await prisma.industry.findUnique({
+  const industry = await safeQuery(() => prisma.industry.findUnique({
     where: { slug: params.slug },
-  });
+  }), null);
 
   if (!industry || industry.status !== 'PUBLISHED') {
     notFound();

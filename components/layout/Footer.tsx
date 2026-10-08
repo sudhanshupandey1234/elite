@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Globe,
   Mail,
@@ -81,9 +82,11 @@ export function Footer({ settings = {}, services = [], solutions = [] }: FooterP
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <img
+              <Image
                 src="/logo.png"
                 alt={brandName}
+                width={360}
+                height={287}
                 className="h-11 w-auto object-contain rounded-lg shadow-sm"
               />
               <div className="flex flex-col">

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Globe,
@@ -216,9 +217,12 @@ export function Navbar({ navItems: propNavItems, services: propServices, solutio
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <img
+            <Image
               src="/logo.png"
               alt="EliteGlobex"
+              width={360}
+              height={287}
+              priority
               className="h-10 w-auto object-contain rounded-lg shadow-sm group-hover:scale-105 transition-transform"
             />
             <div className="flex flex-col">

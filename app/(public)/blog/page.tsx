@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { Clock, ArrowRight, User, Calendar } from 'lucide-react';
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function BlogCatalogPage() {
-  const posts = await prisma.blogPost.findMany({
+  const posts = await safeQuery(() => prisma.blogPost.findMany({
     where: { status: 'PUBLISHED' },
     orderBy: { publishedAt: 'desc' },
-  });
+  }), []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">

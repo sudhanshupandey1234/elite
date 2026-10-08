@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -43,9 +44,9 @@ function youtubeEmbedUrl(url: string): string | null {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = await prisma.service.findUnique({
+  const service = await safeQuery(() => prisma.service.findUnique({
     where: { slug: params.slug },
-  });
+  }), null);
 
   if (!service) return { title: 'Service Not Found' };
 
@@ -72,9 +73,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 60;
 
 export default async function ServiceDetailPage({ params }: Props) {
-  const service = await prisma.service.findUnique({
+  const service = await safeQuery(() => prisma.service.findUnique({
     where: { slug: params.slug },
-  });
+  }), null);
 
   if (!service || service.status !== 'PUBLISHED') {
     notFound();

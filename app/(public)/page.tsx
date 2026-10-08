@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import {
   Globe,
   ArrowRight,
@@ -29,7 +30,7 @@ import { StaggerIn } from '@/components/anim/StaggerIn';
 import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { getHomepageCMS, getSiteSettings, DEFAULT_HOMEPAGE_CONTENT } from '@/lib/cms';
 
-export const revalidate = 0; // Dynamic rendering for instant CMS updates
+export const revalidate = 60; // ISR: cached 60s, CMS edits appear within a minute
 
 export default async function HomePage() {
   const [
@@ -45,40 +46,40 @@ export default async function HomePage() {
   ] = await Promise.all([
     getHomepageCMS(),
     getSiteSettings(),
-    prisma.service.findMany({
+    safeQuery(() => prisma.service.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { order: 'asc' },
       take: 6,
-    }),
-    prisma.solution.findMany({
+    }), []),
+    safeQuery(() => prisma.solution.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { order: 'asc' },
       take: 3,
-    }),
-    prisma.industry.findMany({
+    }), []),
+    safeQuery(() => prisma.industry.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { order: 'asc' },
       take: 4,
-    }),
-    prisma.projectCaseStudy.findMany({
+    }), []),
+    safeQuery(() => prisma.projectCaseStudy.findMany({
       where: { status: 'PUBLISHED', isFeatured: true },
       take: 3,
-    }),
-    prisma.blogPost.findMany({
+    }), []),
+    safeQuery(() => prisma.blogPost.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { publishedAt: 'desc' },
       take: 3,
-    }),
-    prisma.testimonial.findMany({
+    }), []),
+    safeQuery(() => prisma.testimonial.findMany({
       where: { status: 'PUBLISHED' },
       orderBy: { order: 'asc' },
       take: 3,
-    }),
-    prisma.officeLocation.findMany({
+    }), []),
+    safeQuery(() => prisma.officeLocation.findMany({
       where: { status: 'ACTIVE' },
       orderBy: { isHQ: 'desc' },
       take: 4,
-    }),
+    }), []),
   ]);
 
   const hero = cmsData.hero || DEFAULT_HOMEPAGE_CONTENT;

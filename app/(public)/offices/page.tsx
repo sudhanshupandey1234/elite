@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { MapPin, Phone, Mail, Clock, ExternalLink, Globe } from 'lucide-react';
@@ -14,10 +15,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function OfficesPage() {
-  const offices = await prisma.officeLocation.findMany({
+  const offices = await safeQuery(() => prisma.officeLocation.findMany({
     where: { status: 'ACTIVE' },
     orderBy: { isHQ: 'desc' },
-  });
+  }), []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">

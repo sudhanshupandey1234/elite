@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft, Clock, Calendar, User, Share2, Tag } from 'lucide-react';
@@ -13,9 +14,9 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await prisma.blogPost.findUnique({
+  const post = await safeQuery(() => prisma.blogPost.findUnique({
     where: { slug: params.slug },
-  });
+  }), null);
 
   if (!post) return { title: 'Article Not Found' };
 
@@ -28,9 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 60;
 
 export default async function BlogPostDetailPage({ params }: Props) {
-  const post = await prisma.blogPost.findUnique({
+  const post = await safeQuery(() => prisma.blogPost.findUnique({
     where: { slug: params.slug },
-  });
+  }), null);
 
   if (!post || post.status !== 'PUBLISHED') {
     notFound();

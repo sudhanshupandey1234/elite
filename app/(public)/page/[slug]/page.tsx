@@ -14,7 +14,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-export const revalidate = 0; // Dynamic rendering for instant CMS updates
+export const revalidate = 60; // ISR: cached 60s, CMS edits appear within a minute
 
 interface PageProps {
   params: {

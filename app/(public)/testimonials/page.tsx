@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -15,10 +16,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function TestimonialsPage() {
-  const testimonials = await prisma.testimonial.findMany({
+  const testimonials = await safeQuery(() => prisma.testimonial.findMany({
     where: { status: 'PUBLISHED' },
     orderBy: { order: 'asc' },
-  });
+  }), []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">

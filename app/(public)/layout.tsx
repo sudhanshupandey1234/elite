@@ -3,7 +3,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { getNavigationCMS, getSiteSettings, getPublishedServices, getPublishedSolutions } from '@/lib/cms';
 
-export const revalidate = 0; // Dynamic rendering for instant CMS updates
+export const revalidate = 60; // ISR: cached 60s, CMS edits appear within a minute
 
 export default async function PublicLayout({
   children,

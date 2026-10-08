@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
+import { safeQuery } from '@/lib/db';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function CareersPage() {
-  const jobs = await prisma.jobPosition.findMany({
+  const jobs = await safeQuery(() => prisma.jobPosition.findMany({
     where: { status: 'OPEN' },
     orderBy: { createdAt: 'desc' },
-  });
+  }), []);
 
   const perks = [
     'Competitive global compensation + equity grants',
