@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/Button';
 import { MapPin, Phone, Mail, Clock, ExternalLink, Globe } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Global Offices & Worldwide Presence | EliteGlobex',
+  title: 'Our Office | EliteGlobex',
   description:
-    'EliteGlobex global presence across London, New York, Singapore, and Dubai delivering 24/7 enterprise engineering.',
+    'Visit EliteGlobex at Vineet Khand 6, Gomtinagar, Lucknow — IT products, GeM services and AMC support across India.',
 };
 
 export const revalidate = 60;
@@ -23,12 +23,12 @@ export default async function OfficesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
       <div className="text-center max-w-3xl mx-auto space-y-4">
-        <Badge variant="blue">Global Footprint</Badge>
+        <Badge variant="blue">Our Location</Badge>
         <h1 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
-          Operating Across Key <span className="gradient-text-blue">Tech Capitals</span>
+          Visit Our <span className="gradient-text-blue">Office</span>
         </h1>
         <p className="text-slate-600 text-base leading-relaxed">
-          Our distributed engineering squads and regional client desks ensure round-the-clock architecture support, instant incident response, and local regulatory alignment.
+          Based in Lucknow, serving schools, offices and government bodies across India — walk in for product demos, bulk quotes and AMC support.
         </p>
       </div>
 
@@ -49,7 +49,7 @@ export default async function OfficesPage() {
                 </div>
               </div>
               {off.isHQ && (
-                <Badge variant="blue" size="sm">Global HQ</Badge>
+                <Badge variant="blue" size="sm">Head Office</Badge>
               )}
             </div>
 

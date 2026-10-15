@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-slate-900">5. Contact Data Privacy Officer</h2>
           <p>
-            For inquiries regarding data protection, right to erasure, or data processing agreements (DPAs), contact our legal compliance team at <span className="text-blue-600 font-mono font-semibold">privacy@eliteglobex.com</span>.
+            For inquiries regarding data protection, right to erasure, or data processing agreements (DPAs), contact our team at <span className="text-blue-600 font-mono font-semibold">eliteglobex4794@gmail.com</span>.
           </p>
         </section>
       </div>

@@ -157,7 +157,7 @@ export default function AdminOfficesPage() {
                   </div>
                   {off.isHQ && (
                     <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                      Global HQ
+                      Head Office
                     </span>
                   )}
                 </div>
