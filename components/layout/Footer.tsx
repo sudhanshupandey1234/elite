@@ -23,9 +23,9 @@ export function Footer({ settings = {}, services = [], solutions = [] }: FooterP
   const brandName = settings.site_name || 'ELITEGLOBEX';
   const brandTagline = settings.tagline || 'Global Technology & Solutions';
   const brandDescription = settings.footer_about || settings.site_description || 'Architecting mission-critical digital systems, multi-cloud platforms, applied AI pipelines, and enterprise software solutions for forward-thinking organizations.';
-  const contactAddress = settings.hq_address || '100 Bishopsgate, Level 24, London, EC2N 4AG, UK';
-  const contactEmail = settings.contact_email || 'contact@eliteglobex.com';
-  const contactPhone = settings.contact_phone || '+1 (800) 555-ELITE';
+  const contactAddress = settings.hq_address || 'Vineet Khand 6, Gomtinagar, Lucknow – 226010';
+  const contactEmail = settings.contact_email || 'eliteglobex4794@gmail.com';
+  const contactPhone = settings.contact_phone || '+91 73552 23184';
   const copyrightText = settings.footer_copyright || `© ${currentYear} ${brandName} Inc. All rights reserved. Global enterprise technology consultancy.`;
 
   const defaultServicesLinks = [

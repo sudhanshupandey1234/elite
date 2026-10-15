@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import {
@@ -27,6 +27,29 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+
+  // Direct-communication card reads from Site Settings (editable in admin
+  // panel); falls back to the real business details if the fetch fails.
+  const [contactInfo, setContactInfo] = useState({
+    email: 'eliteglobex4794@gmail.com',
+    phone: '+91 73552 23184',
+    hours: 'Mon–Sat, 10:00 AM – 7:00 PM IST',
+    address: 'Vineet Khand 6, Gomtinagar, Lucknow – 226010',
+  });
+  useEffect(() => {
+    fetch('/api/site-settings')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((s) => {
+        if (!s) return;
+        setContactInfo((prev) => ({
+          email: s.contact_email || prev.email,
+          phone: s.contact_phone || prev.phone,
+          hours: s.support_hours || prev.hours,
+          address: s.hq_address || prev.address,
+        }));
+      })
+      .catch(() => {});
+  }, []);
 
   const services = [
     'Cloud Architecture & DevOps',
@@ -246,31 +269,31 @@ export default function ContactPage() {
                 <Mail className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
                 <div>
                   <div className="font-semibold text-slate-900">Direct Inquiries</div>
-                  <div className="text-slate-500">contact@eliteglobex.com</div>
+                  <div className="text-slate-500">{contactInfo.email}</div>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                 <Phone className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-semibold text-slate-900">Global Desk</div>
-                  <div className="text-slate-500 font-mono">+1 (800) 555-ELITE / +44 20 7946 0920</div>
+                  <div className="font-semibold text-slate-900">Phone / WhatsApp</div>
+                  <div className="text-slate-500 font-mono">{contactInfo.phone}</div>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                 <Clock className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-semibold text-slate-900">Operational Coverage</div>
-                  <div className="text-slate-500">24/7 Global Engineering Operations</div>
+                  <div className="font-semibold text-slate-900">Working Hours</div>
+                  <div className="text-slate-500">{contactInfo.hours}</div>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
                 <MapPin className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-semibold text-slate-900">Global Headquarters</div>
-                  <div className="text-slate-500">100 Bishopsgate, Level 24, London, EC2N 4AG, UK</div>
+                  <div className="font-semibold text-slate-900">Office Address</div>
+                  <div className="text-slate-500">{contactInfo.address}</div>
                 </div>
               </div>
             </div>
